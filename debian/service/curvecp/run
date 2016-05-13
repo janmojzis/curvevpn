@@ -1,0 +1,48 @@
+#!/bin/sh -e
+exec 2>&1
+
+DEFAULTFILE="/etc/default/curvevpn-server-run"
+[ -f "${DEFAULTFILE}" ] && . "${DEFAULTFILE}"
+
+if [ x"${ROOT}" = x ]; then echo "\$ROOT not set, please edit ${DEFAULTFILE}"; exit 111; fi
+if [ x"${IP}" = x ]; then echo "\$IP not set, please edit ${DEFAULTFILE}"; exit 111; fi
+if [ x"${PORT}" = x ]; then echo "\$PORT not set, please edit ${DEFAULTFILE}"; exit 111; fi
+if [ x"${NAME}" = x ]; then echo "\$NAME not set, please edit ${DEFAULTFILE}"; exit 111; fi
+if [ x"${USER}" = x ]; then echo "\$USER not set, please edit ${DEFAULTFILE}"; exit 111; fi
+if [ x"${NONCESTART}" = x ]; then echo "\$NONCESTART not set, please edit ${DEFAULTFILE}"; exit 111; fi
+
+export ROOT
+
+#CurveVPN key
+while true; do
+  [ -d "${KEYDIR}" ] && break
+  entropy="`cat /proc/sys/kernel/random/entropy_avail`"
+  if [ "${entropy}" -ge 256 ]; then
+    curvevpn-makekey "${KEYDIR}"
+  else
+    echo "entropy too low (${entropy} < 256) - please wait" >&2
+    echo "or run it manualy (at your own risk)" >&2
+    sleep 10
+  fi
+done
+
+#update nonce counter
+curvevpn-updatenoncecounter -s "${NONCESTART}" "${KEYDIR}"
+
+#change directory
+cd "${ROOT}" || exit 111
+
+#make data.cdb file
+if [ -f data ]; then
+  make
+else
+  echo "data file not exist, please create ${ROOT}/data using example /usr/share/curvevpn-server/data.example"
+  exit 111
+fi
+
+#remove lock directory
+rm -f lock/????????????????????????????????????????????????????????????????
+
+echo "Starting CurveVPN server: ${NAME} -> uz7`curvevpn-printkey32 ${KEYDIR}`.${EXTENSION}.{domain}" >&2
+
+exec envuidgid "${USER}" curvevpn-server "${NAME}" "${KEYDIR}" "${IP}" "${PORT}" "${EXTENSION}" curvevpn-message curvevpn -s ................................................................

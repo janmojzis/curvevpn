@@ -1,0 +1,4 @@
+debian/service/curvecp/run etc/curvevpn-server/service/curvecp
+debian/service/curvecp/log/run etc/curvevpn-server/service/curvecp/log
+share/Makefile etc/curvevpn-server
+share/data.example /usr/share/curvevpn-server

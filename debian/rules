@@ -1,0 +1,15 @@
+#!/usr/bin/make -f
+
+export DH_VERBOSE=1
+
+override_dh_auto_build:
+	#env LIBS='-lnacl' CFLAGS='-I/usr/include/nacl' LDFLAGS='-L/usr/lib' sh -e make-curvevpn.sh
+	sh -e make-curvevpn.sh
+
+%:
+	dh $@
+
+clean:
+	rm -rf debian/curvevpn-server debian/curvevpn-run
+	rm -f debian/*.substvars debian/*.debhelper debian/*.log debian/files
+	rm -rf build

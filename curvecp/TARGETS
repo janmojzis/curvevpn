@@ -1,0 +1,7 @@
+curvecpprintkey curvevpn-printkey
+curvecpmakekey curvevpn-makekey
+curvecpclient curvevpn-client
+curvecpserver curvevpn-server
+curvecpmessage curvevpn-message
+netcurvecpupdatenoncecounter curvevpn-updatenoncecounter
+netcurvecpprintkey32 curvevpn-printkey32

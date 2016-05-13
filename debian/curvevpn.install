@@ -1,0 +1,9 @@
+build/bin/curvevpn usr/sbin
+build/bin/curvevpn-client usr/sbin
+build/bin/curvevpn-data usr/sbin
+build/bin/curvevpn-makekey usr/sbin
+build/bin/curvevpn-message usr/sbin
+build/bin/curvevpn-printkey usr/sbin
+build/bin/curvevpn-server usr/sbin
+build/bin/curvevpn-updatenoncecounter usr/sbin
+build/bin/curvevpn-printkey32 usr/sbin

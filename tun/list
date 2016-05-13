@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+echo 'tun.c tun.c-linux'
+echo 'tun.c tun.c-macosx'
+echo 'tun.c tun.c-bsd'
+echo 'tun.c tun.c-disabled'

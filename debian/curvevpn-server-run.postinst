@@ -1,0 +1,35 @@
+#!/bin/sh -e
+
+if [ x"$1" != "xconfigure" ]; then
+  exit 0
+fi
+
+if ! grep -q "^curvevpnsrvlog:" /etc/passwd; then
+  adduser --quiet --system --no-create-home --disabled-password --home /nonexistent --ingroup nogroup --gecos "curvevpnsrvlog user" curvevpnsrvlog
+fi
+
+if ! grep -q "^curvevpnsrv:" /etc/passwd; then
+  adduser --quiet --system --no-create-home --disabled-password --home /nonexistent --ingroup nogroup --gecos "curvevpnsrv user" curvevpnsrv
+fi
+
+
+if [ -e /etc/service ]; then
+  servicedir="/etc/service"
+fi
+if [ -e /service ]; then
+  servicedir="/service"
+fi
+[ x"${servicedir}" = x ] && exit 111
+
+
+DIR="/etc/curvevpn-server/service"; export DIR
+for S in `ls -d ${DIR}/* 2>/dev/null`; do
+    B=`basename "${S}"`
+    if [ -e "${servicedir}/${DPKG_MAINTSCRIPT_PACKAGE}_${B}" ]; then
+        echo "${servicedir}/${DPKG_MAINTSCRIPT_PACKAGE}_${B} exist."
+    else
+        echo -n "linking: ${S} -> ${servicedir}/${DPKG_MAINTSCRIPT_PACKAGE}_${B}"
+        ln -s "${S}" "${servicedir}/${DPKG_MAINTSCRIPT_PACKAGE}_${B}"
+        echo ". done."
+    fi
+done

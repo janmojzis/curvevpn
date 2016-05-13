@@ -1,0 +1,18 @@
+Source: curvevpn
+Section: net
+Priority: optional
+#Build-Depends: debhelper, build-essential, make, libnacl-dev [amd64] | libnacl-dev [i386]
+Build-Depends: debhelper, build-essential, make
+Maintainer: Jan Mojzis <jan.mojzis@gmail.com>
+
+Package: curvevpn
+Section: net
+Depends: ${shlibs:Depends}
+Architecture: any
+Description: CurveVPN - binaries
+
+Package: curvevpn-server-run
+Section: net
+Depends: adm-daemontools | daemontools-run, curvevpn, make, gzip
+Architecture: all
+Description: CurveVPN server under daemontools

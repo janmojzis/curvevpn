@@ -1,0 +1,12 @@
+#!/bin/sh
+
+DEFAULTFILE="/etc/default/curvevpn-server-run"
+[ -f "${DEFAULTFILE}" ] && . "${DEFAULTFILE}"
+
+if [ x"${LOGDIR}" = x ]; then echo "\$LOGDIR not set, please edit ${DEFAULTFILE}"; exit 111; fi
+if [ x"${LOGUSER}" = x ]; then echo "\$LOGUSER not set, please edit ${DEFAULTFILE}"; exit 111; fi
+
+mkdir -p "${LOGDIR}/curvecp" 2>/dev/null || :
+chown -R "${LOGUSER}" "${LOGDIR}/curvecp"
+
+exec setuidgid "${LOGUSER}" multilog t !"gzip -9" n20 s1024000 "${LOGDIR}/curvecp"

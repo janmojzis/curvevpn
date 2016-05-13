@@ -1,0 +1,36 @@
+#IP - CurveCP IP
+IP=0.0.0.0
+
+#PORT - CurveCP port
+PORT=1009
+
+#EXTENSION - CurveCP extension
+EXTENSION=00000000000000000000000000000000
+
+#ROOT - root directory
+ROOT=/etc/curvevpn-server
+
+#KEYDIR - CurveCP key directory
+KEYDIR="${ROOT}/curvecpkeydir"
+
+#USER
+USER=curvevpnsrv
+
+#LOGUSER
+LOGUSER=curvevpnsrvlog
+
+#LOGDIR
+LOGDIR=/var/log/curvevpn-server
+
+#NAME - hostname for CurveCP layer (mandatory)
+#NAME=""
+
+#NONCESTART - nonce startbit (mandatory) - (IMPORTANT for 2 or more servers with same key)
+#NONCESTART=" " #example for 1 server
+#NONCESTART=00  #example for 4 servers - 1st server
+#NONCESTART=01  #example for 4 servers - 2nd server
+#NONCESTART=10  #example for 4 servers - 3rd server
+#NONCESTART=11  #example for 4 servers - 4th server
+
+#commands - (optional)
+#iptables -t nat -A POSTROUTING -s 172.16.0.0/16 -j MASQUERADE

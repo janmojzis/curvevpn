@@ -1,0 +1,7 @@
+curvevpn (20160219u2) stable; urgency=low
+
+  * added debian directory
+  * binaries renamed to curvevpn-*
+  * added updatenoncecounter
+
+ -- Jan Mojzis <jan.mojzis@gmail.com>  Fri, 19 Feb 2016 07:36:13 +0100
