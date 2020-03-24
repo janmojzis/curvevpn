@@ -1,3 +1,9 @@
+curvevpn (20200323) stable; urgency=medium
+
+  * Debian Buster
+
+ -- Jan Mojzis <jan.mojzis@gmail.com>  Tue, 24 Mar 2020 09:54:37 +0100
+
 curvevpn (20160219u2) stable; urgency=low
 
   * added debian directory
